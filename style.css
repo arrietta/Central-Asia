@@ -32,6 +32,10 @@ header{
     transform: scale(1.05);
     transition: 0.5s;
 }
+.d-flex{
+    justify-content: center;
+    padding: 0;
+}
 .blue{
     color: #0f18ff!important;
 }
