@@ -107,48 +107,45 @@
     <div id="map-container">
       
 
-      <script>
-        DG.then(function () {
-          var map = DG.map('map-container', {
-            center: [51.092807, 71.421492], // Coordinates
-            zoom: 16, // Zoom level
-            fullscreenControl: false,
-            zoomControl: false,
-            geoclickerControl: false,
-            searchControl: false,
-            trafficControl: false,
-            infoControl: false,
-            measureControl: false,
-            rulerControl: false,
-            scaleControl: false,
-            minimapControl: false
-          });
-    
-          var marker = DG.marker([51.092807, 71.421492], {
-            icon: DG.icon({
-              iconUrl: 'C:\Users\Arfeil\Desktop\CAFC24\short logo\logo-01.png', // Replace with your custom icon URL
-              iconSize: [32, 32], // Adjust icon size as needed
-              iconAnchor: [16, 16], // Adjust icon anchor as needed
-              popupAnchor: [0, 0] // Adjust popup anchor as needed
-            })
-          }).addTo(map);
-    
-          marker.bindPopup('Press me');
-    
-          // Open link when the marker is clicked
-          marker.on('click', function() {
-            window.location.href = 'https://example.com';
-          });
-    
-          // Prevent dragging and zooming
-          map.dragging.disable();
-          map.touchZoom.disable();
-          map.doubleClickZoom.disable();
-          map.scrollWheelZoom.disable();
-          map.boxZoom.disable();
-          map.keyboard.disable();
-        });
-      </script>
+  <script>
+    DG.then(function () {
+      var map = DG.map('map-container', {
+        center: [51.092807, 71.421492], 
+        zoom: 17, 
+        fullscreenControl: false,
+        zoomControl: false,
+        geoclickerControl: false,
+        searchControl: false,
+        trafficControl: false,
+        infoControl: false,
+        measureControl: false,
+        rulerControl: false,
+        scaleControl: false,
+        minimapControl: false
+      });
+
+      var marker = DG.marker([51.092807, 71.421492]).addTo(map);
+      marker.bindLabel('FIRST CHAMPIONSHIP', {
+        noHide: true,
+        direction: 'auto',
+        permanent: true
+      });
+
+
+      map.on('click', function() {
+        
+        window.location.href = 'https://go.2gis.com/uv8k1';
+      });
+
+      
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
+      map.boxZoom.disable();
+      map.keyboard.disable();
+    });
+  </script>
     </div>
   
     
