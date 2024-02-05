@@ -177,7 +177,7 @@ section.grid{
         padding: 1rem;
     }
     .rounded-box > div{
-        width: 9rem;
+        width: 7rem;
 
     }
     #home{
@@ -190,7 +190,7 @@ section.grid{
         font-size: 2rem;
     }
     .md{
-        font-size: 1.9rem;
+        font-size: 1.7rem;
     }
     .sm{
         font-size: 1.6rem;
