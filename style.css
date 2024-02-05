@@ -179,8 +179,8 @@ section.grid{
         padding: 1rem;
     }
     .rounded-box > div{
-        width: 7rem;
-        margin: 0.25rem;
+        width: 40%;
+        margin: 0.5rem;
 
     }
     #home{
