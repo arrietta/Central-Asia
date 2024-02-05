@@ -1,0 +1,208 @@
+body, html {
+
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+::-webkit-scrollbar {
+    width: 6px; 
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #F9B333; 
+    border-radius: 2px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #A0A0A0; 
+}
+*{
+    font-family: 'Bebas Neue', sans-serif;
+    line-height: 100%; 
+    color: white;
+}
+#nav{
+    transition: 0.5s;
+}
+
+header{
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+}
+
+
+.blue{
+    color: #58529F!important;
+}
+.orange{
+    color: #F9B333!important;
+}
+.black{
+    color: #000;
+}
+
+li{
+    margin: auto;
+    padding: 0.4rem;
+    list-style: none;
+}
+.li{
+    list-style: outside;
+}
+
+
+
+a:hover{
+    color: rgb(107, 105, 105)!important;
+    transform: scale(1.025);
+    transition: 0.2s;
+}
+section{
+    position: relative;
+}
+section.centered{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5% 0;
+}
+section.grid{
+    display: grid;
+    padding: 5% 0;
+}
+
+.xl{
+    font-size: 5rem;
+}
+.lg{
+    font-size: 4rem;
+}
+.md{
+    font-size: 3rem;
+}
+.sm{
+    font-size: 2rem;
+}
+
+.al-center{
+    align-items: center;
+}
+
+.rounded{
+    max-width: 80%;
+}
+#link_main{
+    padding-top:13px ;
+}
+
+#home{
+    background-image: url("Background/cafc-1.png");
+    background-size: cover;
+    background-position: 50% 100% ;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20%;
+}
+
+#about {
+    position: relative;
+
+}
+
+.main_back{
+    background-attachment: fixed;
+    position: absolute;
+
+    background: rgb(88, 82, 159);
+    background: radial-gradient(circle, rgba(88, 82, 159, 1) 15%, rgba(36, 16, 96, 1) 99%);
+    filter: blur(2px);
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.org{
+    justify-content: center;
+    
+}
+.org > img{
+    margin: auto 30px ;
+    margin-top: 2rem;
+}
+
+.row{
+    --bs-gutter-x: auto;
+}
+
+#map{
+    background-image: url("Background/cafc-4.png");
+    background-size: cover;
+    background-position: 50%  ;
+
+    padding: 4rem;
+}
+.rounded-box{
+    justify-content: space-around;
+    
+}
+.rounded-box > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 1rem;
+    height: 10rem;
+    width: 15rem;
+    border-radius: 15px;    
+}
+#map-container{
+    border-radius: 15px;
+    margin: 2rem;
+    height: 500px;
+}
+
+
+
+@media (max-width: 768px){
+    #map{
+        padding: 1rem;
+    }
+    .rounded-box > div{
+        width: 9rem;
+
+    }
+    #home{
+        padding: 10%;
+    }
+    .xl{
+        font-size: 3rem;
+    }
+    .lg{
+        font-size: 2rem;
+    }
+    .md{
+        font-size: 1.9rem;
+    }
+    .sm{
+        font-size: 1.6rem;
+    }
+    
+    .org > img{
+        margin: 20px auto ;
+        
+    }
+   
+}
+@media (max-width: 375px){
+    
+    
+}

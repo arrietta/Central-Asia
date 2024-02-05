@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAFC-2024</title>
+    <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="short logo/logo-01.png">
+    <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+
+
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg  navbar-dark    " id="nav">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+            <ul class="navbar-nav text-center">
+              <ul class="d-flex">
+                <li class="nav-item ">
+                
+                  <a class="nav-link" id="link_inst" href="#"><img src="icon/Instagram.png" height="28px" alt=""></a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" id="link_yt" href="#"><img src="icon/youtube.png" height="28px" alt="" ></a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" id="link_tel" href="#"><img src="icon/telegram.png" height="28px" alt="" ></a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" id="link_fb" href="#"><img src="icon/facebook.png" height="28px" alt="" ></a>
+                </li>
+              </ul>
+            </ul>
+            
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+  <section id="home" class="text-center">
+    <img src="logo/1.png"   alt="">
+  </section>
+  <section id="about" class="grid">
+    <div class="main_back" ></div>
+    <div style="z-index: 1;" >
+      <div class="row text-center">
+        <div class="col-md-6 mt-5 mt-md-1">
+          <img src="image/1.png" class="rounded" alt="">
+        </div>
+        <div class="col-md-6 xl mt-5 mt-md-1 text-md-start text-center">
+          <div><strong class=" "><em >FIRST CHAMPIONSHIP</em> </strong></div>
+          
+          <ul class="md mt-5 text-start">
+            <li class="li "> КРУПНЕЙШЕЕ СООБЩЕСТВО ПО РАЗВИТИЮ РОБОТОТЕХНИКИ В МИРЕ
+            </li>
+            <li class="li ">ПЛОЩАДКА ДЛЯ ПОЛУЧЕНИЯ ОПЫТА И НАВЫКОВ ВСФЕРЕ ИНЖЕНЕРИИ
+            </li>
+            <li class="li ">ВОЗМОЖНОСТЬ НАЙТИ И РАЗВИВАТЬСЯ СОВМЕСТНО С КОМАНДОЙ ЕДИНОМЫШЛЕННИКОВ
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+    
+  </section>
+  <section id="map">
+    
+    <div  class="text-center my-5">
+      <strong class="xl">23-25 ФЕВРАЛЯ</strong>
+      <h2 class="md">EXPO ЦЕНТР, АСТАНА</h2>
+      <p class="sm">МЕЖДУНАРОДНЫЙ ВЫСТАВОЧНЫЙ ЦЕНТР “EXPO”, ПР. МАНГИЛИК ЕЛ, 53/1</p>
+  </div>
+  <div tyle="z-index: 1;" class="rounded-box md p-md-4 text-center row m-auto">
+      
+    <div class=" mt-md-1 col-md-4 col-6">
+      <div>5 000+</div>
+      <div class="h6">УЧАСТНИКОВ И ГОСТЕЙ</div>
+    </div>
+    <div class=" mt-md-1 col-md-4 col-6">
+      <div>200+</div>
+      <div class="h6">КОМАНД И ПРОЕКТОВ</div>
+    </div>
+    
+  
+    <div class=" mt-md-1 mt-5 col-md-4 col-6">
+      <div>20+</div>
+      <div class="h6">ГРАНТОВ И ЦЕННЫХ ПРИЗОВ</div>
+    </div>
+    <div class="mt-md-1 mt-5 col-md-4 col-6">
+      <div>10+</div>
+      <div class="h6">СПОНСОРОВ И ПАРТНЕРОВ</div>
+    </div>
+   
+</div>
+    <div id="map-container">
+      
+
+      <script>
+        DG.then(function () {
+          var map = DG.map('map-container', {
+            center: [51.092807, 71.421492], // Coordinates
+            zoom: 16, // Zoom level
+            fullscreenControl: false,
+            zoomControl: false,
+            geoclickerControl: false,
+            searchControl: false,
+            trafficControl: false,
+            infoControl: false,
+            measureControl: false,
+            rulerControl: false,
+            scaleControl: false,
+            minimapControl: false
+          });
+    
+          var marker = DG.marker([51.092807, 71.421492], {
+            icon: DG.icon({
+              iconUrl: 'C:\Users\Arfeil\Desktop\CAFC24\short logo\logo-01.png', // Replace with your custom icon URL
+              iconSize: [32, 32], // Adjust icon size as needed
+              iconAnchor: [16, 16], // Adjust icon anchor as needed
+              popupAnchor: [0, 0] // Adjust popup anchor as needed
+            })
+          }).addTo(map);
+    
+          marker.bindPopup('Press me');
+    
+          // Open link when the marker is clicked
+          marker.on('click', function() {
+            window.location.href = 'https://example.com';
+          });
+    
+          // Prevent dragging and zooming
+          map.dragging.disable();
+          map.touchZoom.disable();
+          map.doubleClickZoom.disable();
+          map.scrollWheelZoom.disable();
+          map.boxZoom.disable();
+          map.keyboard.disable();
+        });
+      </script>
+    </div>
+  
+    
+  </section>
+  <section  class="  centered bg-white">
+    
+    <div  class="text-center w-75" >
+      <strong class=" xl mt-5 mt-md-1"> <em class="blue">Организаторы </em></strong> 
+      <div class="d-xl-flex org " >
+        <img src="icon/ustem_foundation.png" height="70px" alt="">
+        <img src="icon/Дарын .png" alt="" height="70px">
+        <img src="icon/gerb-1.png" height="80px"  alt=""> 
+        <img src="icon/gerb-2.png" height="80px"  alt=""> 
+        
+        <img src="icon/kerneu.jpg" alt="" height="70px">
+        
+      </div>
+      <div class=" mt-md-5 org">
+        
+        <img src="icon/first.png" height="60px" alt="">
+        <img src="icon/we.png" alt="" height="60px">
+        <img src="icon/tech garden.png" width="250px" alt="">
+        <img src="icon/astana-hub.png" alt="" width="250px">
+        <img src="icon/mel.png" alt="" height="80px">
+        
+      </div>
+      
+      
+    </div>
+    
+      
+    
+    
+  </section>
+
+</main>
+<script>
+  $(document).ready(function() {
+    $(window).scroll(function() {
+      var scrollPosition = $(this).scrollTop();
+
+      if (scrollPosition >= 400) {
+        $("#nav").css('background-color','#58529F');
+      }else{
+        $("#nav").css('background-color','rgba(0,0,0,0)');
+      }
+    });
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+                const sr = ScrollReveal({
+                    origin: 'top',
+                    distance: '20px',
+                    duration: 2000,
+                    reset: true
+                });
+
+                sr.reveal('#home img', { delay: 100 });
+
+                sr.reveal('#about > div div', { delay: 140 });                
+
+                sr.reveal('#map', { delay: 100 });
+                
+                sr.reveal('#welcome', { delay: 100 });
+                
+
+                
+            });
+</script>
+
+
+</body>
+</html>
+
+
