@@ -161,6 +161,7 @@ section.grid{
 }
 .rounded-box{
     justify-content: space-around;
+    filter: drop-shadow(0 -6mm 4mm rgb(0, 0, 0));
     
 }
 .rounded-4{
@@ -170,7 +171,7 @@ section.grid{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.3);
     margin: 1rem;
     height: 10rem;
     width: 15rem;
