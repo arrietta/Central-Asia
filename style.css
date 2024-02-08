@@ -222,7 +222,7 @@ section.grid{
 @media (max-width: 768px){
     .h5{
         font-size: 1rem;
-        padding: 6px;
+        padding: 10px;
     }
     .w-md-50{
         width: auto;
