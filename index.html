@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таймер и блоки</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    /* Place custom CSS styles here */
+  
+
+    #blocks {
+    display: flex!important;
+    justify-content: center!important;
+    align-items: flex-end!important;
+    overflow-x: auto!important; /* Включаем горизонтальную прокрутку */
+     white-space: nowrap!important; /* Запрещаем перенос текста */
+    /* Убираем перенос блоков на новую строку */
+    }
+
+    .block-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 50px;
+    }
+
+    
+    .block {
+        width: 16rem;
+        height: 10rem;
+    
+        border: 2px solid #ddd;
+        margin: 1px;
+        position: relative;
+       
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        transition: all 0.3s ease;
+    }
+
+    .block:hover {
+    transform: translateY(-5px); /* При наведении добавляем небольшую анимацию поднятия блока */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Увеличиваем тень */
+    }
+
+    .block-title {
+        width: 100%;
+    
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+
+    .add-block-btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="d-flex justify-content-center m-5"><img src="first.png" class="d-inline-block align-top" height="100px" alt="Your Logo"></div>
+
+  <!-- Timer Section -->
+  <div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div id="timer" class="text-center">
+          <h2>3:00</h2>
+          <button id="timerBtn" class="btn btn-primary">Start</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <button id="addCommandsBtn" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addCommandsModal">Добавить список команд</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Commands Modal -->
+  <div class="modal fade" id="addCommandsModal" tabindex="-1" role="dialog" aria-labelledby="addCommandsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCommandsModalLabel">Добавить список команд</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="file" id="commandsFileInput" class="form-control-file">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+          <button type="button" class="btn btn-primary" id="uploadCommandsBtn">Загрузить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blocks Section -->
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="blocks" class="d-flex justify-content-center flex-wrap align-items-end">
+          <!-- Blocks will be added dynamically here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // JavaScript code for timer and block manipulation
+    let timerInterval;
+
+    document.getElementById('timerBtn').addEventListener('click', function() {
+    const timerBtn = this;
+    const blocksCount = document.getElementById('blocks').childElementCount;
+
+    if (timerBtn.textContent === 'Start') {
+        timerBtn.textContent = 'Restart';
+        if (blocksCount === 0) {
+        alert('Please add blocks before starting the timer!');
+        timerBtn.textContent = 'Start';
+        return;
+        }
+        startTimer(180, document.querySelector('#timer h2')); // 180 секунд = 3 минуты
+    } else {
+        timerBtn.textContent = 'Start';
+        clearInterval(timerInterval);
+        document.querySelector('#timer h2').textContent = '3:00';
+        removeFirstBlock();
+    }
+    });
+
+
+
+
+
+    function removeFirstBlock() {
+    let blocksDiv = document.getElementById('blocks');
+    if (blocksDiv.childElementCount > 0) {
+        blocksDiv.removeChild(blocksDiv.firstChild);
+        blocksDiv.firstElementChild.style.display = 'none';
+    }
+    }
+
+
+       
+
+
+    function startTimer(duration, display) {
+    let timer = duration;
+    let start = Date.now(), diff, minutes, seconds;
+
+    function timerFunction() {
+        diff = duration - (((Date.now() - start) / 1000) | 0);
+
+        minutes = (diff / 60) | 0;
+        seconds = (diff % 60) | 0;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (diff <= 0) {
+        clearInterval(timerInterval);
+        removeFirstBlock();
+        }
+    }
+
+    timerFunction();
+    timerInterval = setInterval(timerFunction, 1000);
+    }
+
+   
+
+
+    // Function to add a block
+    function addBlock(title) {
+        let block = document.createElement('div');
+        block.className = 'block';
+        let titleDiv = document.createElement('div');
+        titleDiv.className = 'block-title';
+        titleDiv.textContent = title;
+        block.appendChild(titleDiv);
+        document.getElementById('blocks').appendChild(block);
+    }
+
+    // Function to read file and add commands as blocks
+    $(document).ready(function(){
+        $('#uploadCommandsBtn').click(function() {
+            let file = document.getElementById('commandsFileInput').files[0];
+            let reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function(e) {
+            let lines = e.target.result.split('\n');
+            lines.forEach(function(line) {
+                addBlock(line.trim());
+            });
+            $('#addCommandsModal').modal('hide');
+            }
+        });
+    });
+
+    // Event listener for Save Block button
+    document.getElementById('saveBlockBtn').addEventListener('click', function() {
+      let blockTitleInput = document.getElementById('blockTitleInput');
+      if (blockTitleInput.value.trim() !== '') {
+        addBlock(blockTitleInput.value.trim());
+        $('#addBlockModal').modal('hide');
+        blockTitleInput.value = '';
+      } else {
+        alert('Please enter a title for the block!');
+      }
+    });
+  </script>
+</body>
+</html>
