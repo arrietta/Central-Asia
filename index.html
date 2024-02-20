@@ -94,25 +94,35 @@
   </div>
 
   <!-- Add Commands Modal -->
-  <div class="modal fade" id="addCommandsModal" tabindex="-1" role="dialog" aria-labelledby="addCommandsModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addCommandsModalLabel">Добавить список команд</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="modal fade" id="addCommandsModal" tabindex="-1" role="dialog" aria-labelledby="addCommandsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="addCommandsModalLabel">Добавить список команд</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <input type="radio" name="fileType" id="fileTypeUrl" value="url">
+            <label for="fileTypeUrl">Загрузить по ссылке:</label>
+            <input type="text" id="commandsUrlInput" class="form-control mb-2" placeholder="Введите URL файла">
+            <input type="radio" name="fileType" id="fileTypeDefault" value="default" checked>
+            <label for="fileTypeDefault">Использовать предварительно введенную ссылку:</label>
+            <input type="text" id="defaultUrlInput" class="form-control mb-2" value="" readonly>
+            <input type="radio" name="fileType" id="fileTypeUpload" value="upload">
+            <label for="fileTypeUpload">Выбрать файл:</label>
+            <input type="file" id="commandsFileInput" class="form-control-file">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary" id="uploadCommandsBtn">Загрузить</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <input type="file" id="commandsFileInput" class="form-control-file">
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-          <button type="button" class="btn btn-primary" id="uploadCommandsBtn">Загрузить</button>
-        </div>
-      </div>
     </div>
-  </div>
+  
+  
 
   <!-- Blocks Section -->
   <div class="container-fluid mt-5">
@@ -212,21 +222,60 @@
         document.getElementById('blocks').appendChild(block);
     }
 
-    // Function to read file and add commands as blocks
-    $(document).ready(function(){
-        $('#uploadCommandsBtn').click(function() {
-            let file = document.getElementById('commandsFileInput').files[0];
-            let reader = new FileReader();
-            reader.readAsText(file);
-            reader.onload = function(e) {
-            let lines = e.target.result.split('\n');
-            lines.forEach(function(line) {
-                addBlock(line.trim());
-            });
-            $('#addCommandsModal').modal('hide');
-            }
-        });
+    // URL файла по умолчанию
+    const defaultFileUrl = "https://raw.githubusercontent.com/arrietta/Central-Asia/giga/%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B.txt";
+
+    // Установка значения URL по умолчанию в соответствующее поле ввода
+    document.getElementById('defaultUrlInput').value = defaultFileUrl;
+
+    // Обработчик события нажатия кнопки "Загрузить"
+    document.getElementById('uploadCommandsBtn').addEventListener('click', function() {
+    let selectedType = document.querySelector('input[name="fileType"]:checked').value;
+    let fileInput;
+    if (selectedType === 'upload') {
+        fileInput = document.getElementById('commandsFileInput').files[0];
+        readCommandsFromFile(fileInput);
+    } else if (selectedType === 'url') {
+        let url = document.getElementById('commandsUrlInput').value;
+        fetchCommandsFromUrl(url);
+    } else if (selectedType === 'default') {
+        fetchCommandsFromUrl(defaultFileUrl);
+    }
     });
+
+    // Функция для чтения команд из файла
+    function readCommandsFromFile(file) {
+    let reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(e) {
+        let commands = e.target.result.split('\n').map(line => line.trim());
+        addCommandsToBlocks(commands);
+        $('#addCommandsModal').modal('hide');
+    };
+    }
+
+    // Функция для загрузки команд из URL
+    function fetchCommandsFromUrl(url) {
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+        let commands = data.split('\n').map(line => line.trim());
+        addCommandsToBlocks(commands);
+        $('#addCommandsModal').modal('hide');
+        })
+        .catch(error => {
+        console.error('Error fetching commands from URL:', error);
+        alert('An error occurred while fetching the commands from the URL. Please try again.');
+        });
+    }
+
+    // Функция для добавления команд в блоки
+    function addCommandsToBlocks(commands) {
+    commands.forEach(function(command) {
+        addBlock(command);
+    });
+    }
+
 
     // Event listener for Save Block button
     document.getElementById('saveBlockBtn').addEventListener('click', function() {
