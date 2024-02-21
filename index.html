@@ -66,85 +66,42 @@
         background-image: url("fll.png");
         background-size: cover;
         background-position: 50%;
+        height: 100vh;
+        position: relative;
+    }
+    #timer{
+      position: absolute;
+      left: 50%;
+      top:50%;
+      transform: translate(-50%,-50%);
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <div class="d-flex justify-content-center m-5"><img src="chalenge.svg" class="d-inline-block align-top" height="100px" alt="Your Logo"></div>
+  <div class="d-flex justify-content-center pt-5"><img src="chalenge.svg" class="d-inline-block align-top" height="100px" alt="Your Logo"></div>
 
-  <!-- Timer Section -->
-  <div class="container mt-5 pt-5">
+  <div class="container m-auto" id="timer">
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div id="timer" class="text-center text-white">
-          <h2>2:30</h2>
-          <button id="timerBtn" class="btn btn-light">Start</button>
+          <h1>2:30</h1>
+          <button id="timerBtn" class="btn btn-light px-4 ">Start</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container mt-3">
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <button id="addCommandsBtn" class="btn btn-danger btn-block" data-toggle="modal" data-target="#addCommandsModal">Добавить список команд</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Add Commands Modal -->
-    <div class="modal fade" id="addCommandsModal" tabindex="-1" role="dialog" aria-labelledby="addCommandsModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="addCommandsModalLabel">Добавить список команд</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-            <input type="radio" name="fileType" id="fileTypeUrl" value="url">
-            <label for="fileTypeUrl">Загрузить по ссылке:</label>
-            <input type="text" id="commandsUrlInput" class="form-control mb-2" placeholder="Введите URL файла">
-            <input type="radio" name="fileType" id="fileTypeDefault" value="default" checked>
-            <label for="fileTypeDefault">Использовать предварительно введенную ссылку:</label>
-            <input type="text" id="defaultUrlInput" class="form-control mb-2" value="" readonly>
-            <input type="radio" name="fileType" id="fileTypeUpload" value="upload">
-            <label for="fileTypeUpload">Выбрать файл:</label>
-            <input type="file" id="commandsFileInput" class="form-control-file">
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-            <button type="button" class="btn btn-primary" id="uploadCommandsBtn">Загрузить</button>
-            </div>
-        </div>
-        </div>
-    </div>
   
   
 
-  <!-- Blocks Section -->
-  <div class="container-fluid mt-5">
-    <div class="row">
-      <div class="col-md-12">
-        <div id="blocks" class="d-flex justify-content-center flex-wrap align-items-end text-white">
-          <!-- Blocks will be added dynamically here -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-
   
-
-  <!-- Bootstrap JS, Popper.js, and jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- Custom JS -->
+
+
   <script>
-    // JavaScript code for timer and block manipulation
+
     let timerInterval;
 
     document.getElementById('timerBtn').addEventListener('click', function() {
@@ -167,20 +124,6 @@
     }
     });
 
-
-
-
-
-    function removeFirstBlock() {
-    let blocksDiv = document.getElementById('blocks');
-    if (blocksDiv.childElementCount > 0) {
-        blocksDiv.removeChild(blocksDiv.firstChild);
-        blocksDiv.firstElementChild.style.display = 'none';
-    }
-    }
-
-
-       
 
 
     function startTimer(duration, display) {
@@ -209,85 +152,6 @@
     }
 
    
-
-
-    // Function to add a block
-    function addBlock(title) {
-        let block = document.createElement('div');
-        block.className = 'block';
-        let titleDiv = document.createElement('div');
-        titleDiv.className = 'block-title';
-        titleDiv.textContent = title;
-        block.appendChild(titleDiv);
-        document.getElementById('blocks').appendChild(block);
-    }
-
-    // URL файла по умолчанию
-    const defaultFileUrl = "https://raw.githubusercontent.com/arrietta/Central-Asia/giga/%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B.txt";
-
-    // Установка значения URL по умолчанию в соответствующее поле ввода
-    document.getElementById('defaultUrlInput').value = defaultFileUrl;
-
-    // Обработчик события нажатия кнопки "Загрузить"
-    document.getElementById('uploadCommandsBtn').addEventListener('click', function() {
-    let selectedType = document.querySelector('input[name="fileType"]:checked').value;
-    let fileInput;
-    if (selectedType === 'upload') {
-        fileInput = document.getElementById('commandsFileInput').files[0];
-        readCommandsFromFile(fileInput);
-    } else if (selectedType === 'url') {
-        let url = document.getElementById('commandsUrlInput').value;
-        fetchCommandsFromUrl(url);
-    } else if (selectedType === 'default') {
-        fetchCommandsFromUrl(defaultFileUrl);
-    }
-    });
-
-    // Функция для чтения команд из файла
-    function readCommandsFromFile(file) {
-    let reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = function(e) {
-        let commands = e.target.result.split('\n').map(line => line.trim());
-        addCommandsToBlocks(commands);
-        $('#addCommandsModal').modal('hide');
-    };
-    }
-
-    // Функция для загрузки команд из URL
-    function fetchCommandsFromUrl(url) {
-    fetch(url)
-        .then(response => response.text())
-        .then(data => {
-        let commands = data.split('\n').map(line => line.trim());
-        addCommandsToBlocks(commands);
-        $('#addCommandsModal').modal('hide');
-        })
-        .catch(error => {
-        console.error('Error fetching commands from URL:', error);
-        alert('An error occurred while fetching the commands from the URL. Please try again.');
-        });
-    }
-
-    // Функция для добавления команд в блоки
-    function addCommandsToBlocks(commands) {
-    commands.forEach(function(command) {
-        addBlock(command);
-    });
-    }
-
-
-    // Event listener for Save Block button
-    document.getElementById('saveBlockBtn').addEventListener('click', function() {
-      let blockTitleInput = document.getElementById('blockTitleInput');
-      if (blockTitleInput.value.trim() !== '') {
-        addBlock(blockTitleInput.value.trim());
-        $('#addBlockModal').modal('hide');
-        blockTitleInput.value = '';
-      } else {
-        alert('Please enter a title for the block!');
-      }
-    });
   </script>
 </body>
 </html>
