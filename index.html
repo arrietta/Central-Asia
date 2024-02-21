@@ -106,16 +106,10 @@
 
     document.getElementById('timerBtn').addEventListener('click', function() {
     const timerBtn = this;
-    const blocksCount = document.getElementById('blocks').childElementCount;
 
     if (timerBtn.textContent === 'Start') {
         timerBtn.textContent = 'Restart';
-        if (blocksCount === 0) {
-        alert('Please add blocks before starting the timer!');
-        timerBtn.textContent = 'Start';
-        return;
-        }
-        startTimer(150, document.querySelector('#timer h2')); // 180 секунд = 3 минуты
+        startTimer(150, document.querySelector('#timer h1')); // 180 секунд = 3 минуты
     } else {
         timerBtn.textContent = 'Start';
         clearInterval(timerInterval);
